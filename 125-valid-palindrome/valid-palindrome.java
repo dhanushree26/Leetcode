@@ -9,7 +9,8 @@ class Solution {
             return true;
         }
         if(!Character.isLetterOrDigit(s.charAt(l))){
-            return helper(s,l+1,r);
+            l = l + 1;
+            return helper(s, l, r);
         }
         if(!Character.isLetterOrDigit(s.charAt(r))){
             return helper(s,l,r-1);
