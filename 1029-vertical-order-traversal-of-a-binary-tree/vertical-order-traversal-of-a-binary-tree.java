@@ -34,9 +34,9 @@ class Solution {
             return;
         }
         dfs(root.left,row+1,col-1);
+        dfs(root.right,row+1,col+1);
         map.putIfAbsent(col,new TreeMap<>());
         map.get(col).putIfAbsent(row,new PriorityQueue<>());
         map.get(col).get(row).offer(root.val);
-        dfs(root.right,row+1,col+1);
     }
 }
