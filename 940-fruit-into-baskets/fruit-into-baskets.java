@@ -14,7 +14,7 @@ class Solution {
                 }
                 l++;
             }
-            else{
+            if(map.size()<=2){
                 int len = r-l+1;
                 max = Math.max(len,max);
             }
