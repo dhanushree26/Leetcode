@@ -9,7 +9,9 @@ class Solution {
             hash[s.charAt(r)-'a'] = r;
             int min = n;
             if(hash[0]!=-1 && hash[1]!=-1 && hash[2]!=-1){
-                min = Math.min(hash[0],Math.min(hash[1],hash[2]));
+                for(int i=0;i<3;i++){
+                    min = Math.min(min,hash[i]);
+                }
                 cnt+=(min+1);
             }
             r++;
