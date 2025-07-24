@@ -2,7 +2,6 @@ class Solution {
     public int numIslands(char[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        //ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         int cnt = 0;
         boolean[][] vis = new boolean[n][m];
         for(int i=0;i<n;i++){
