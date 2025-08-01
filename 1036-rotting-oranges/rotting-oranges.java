@@ -1,42 +1,57 @@
+class Pair{
+    int r;
+    int c;
+    int t;
+    Pair(int r,int c,int t){
+        this.r = r;
+        this.c = c;
+        this.t = t;
+    }
+}
 class Solution {
     public int orangesRotting(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        //boolean[][] vis = new boolean[n][m];
-        int max = 2;
+        int[][] vis = new int[n][m];
+        Queue<Pair> q = new LinkedList<>();
+        int freshcnt = 0;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j]==2){
-                    dfs(grid,i,j,2);
+                if(grid[i][j] == 2){
+                    q.add(new Pair(i,j,0));
+                    vis[i][j] = 2;
                 }
-            }
-        }
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
+                else{
+                    vis[i][j] = 0;
+                }
                 if(grid[i][j]==1){
-                    return -1;
-                }
-                if(grid[i][j]>max){
-                    max = grid[i][j];
+                    freshcnt++;
                 }
             }
         }
-        return max-2;
-    }
-    public void dfs(int[][] grid,int i,int j,int cnt){
-        int n = grid.length;
-        int m = grid[0].length;
-        if(i<0 || i>=n || j<0 || j>=m){
-            return;
+        int[] drow ={-1,0,1,0};
+        int[] dcol ={0,1,0,-1};
+        int cnt = 0;
+        int tm = 0;
+        while(!q.isEmpty()){
+            int row = q.peek().r;
+            int col = q.peek().c;
+            int t = q.peek().t;
+            tm = Math.max(t,tm);
+            q.remove();
+            for(int i=0;i<4;i++){
+                int nrow = row+drow[i];
+                int ncol = col+dcol[i];
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && grid[nrow][ncol]==1){
+                    q.add(new Pair(nrow,ncol,tm+1));
+                    vis[nrow][ncol] = 2;
+                    cnt++;
+                }
+            }
         }
-        if(grid[i][j]!=1 && grid[i][j]<cnt){
-            return;
+        if(cnt!=freshcnt){
+            return -1;
         }
-        grid[i][j] = cnt;
-        //vis[i][j] = true;
-        dfs(grid,i+1,j,cnt+1);
-        dfs(grid,i-1,j,cnt+1);
-        dfs(grid,i,j+1,cnt+1);
-        dfs(grid,i,j-1,cnt+1);
+        return tm;
     }
 }
