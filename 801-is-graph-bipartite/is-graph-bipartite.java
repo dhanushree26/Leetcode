@@ -5,14 +5,14 @@ class Solution {
         Arrays.fill(color,-1);
         for(int i=0;i<V;i++){
             if(color[i]==-1){
-                if(helper(i,color,graph,V)==false){
+                if(bfs(i,color,graph,V)==false){
                     return false;
                 }
             }
         }
         return true;
     }
-    public boolean helper(int start,int[] color,int[][] graph,int V){
+    public boolean bfs(int start,int[] color,int[][] graph,int V){
         Queue<Integer> q = new LinkedList<>();
         q.offer(start);
         color[start] = 0;
