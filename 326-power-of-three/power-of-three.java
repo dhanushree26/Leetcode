@@ -3,7 +3,7 @@ class Solution {
         if(n==1){
             return true;
         }
-        for(int i=0;i<=n/3;i++){
+        for(int i=0;i<n;i++){
             long val = (long)(Math.pow(3,i));
             if(val==n){
                 return true;
